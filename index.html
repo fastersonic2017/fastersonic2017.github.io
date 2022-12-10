@@ -1,63 +1,146 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Sonicfan2017's Website!</title>
-		<font color=white>
-	  </head>
-	  <body>
-	  <h1>Welcome to my website!</h1>
-      <p>Here you can find some programs I've made, and my software archive!</p>
-	  <br>
-	  <br>
-	  <h1>My Socials:</h1>
-	  <a href="https://www.youtube.com/@sonicfantech4527">YouTube</a>
-	  <br>
-	  <a href="https://discord.gg/sFTG3ChNxw">Discord</a>
-	  <br>
-	  <a href="https://www.tiktok.com/@fastersonic2017">Tiktok</a>
-	  <br>
-	  <h1>My Other Stuff:</h1>
-	  <a href="https://fastersonic2017.github.io/projects">My Projects\</a>
-	  <br>
-	  <a href="https://fastersonic2017.github.io/softwarearchive">My Software Archive\</a>
-	  </body>
-	  <style>
+<!-- Page Title -->
+<title>Sonic's Website</title>
+<!-- Load the framework -->
+<script src="https://teknixstuff.github.io/AIOstacks/frontend/TVSP.js"></script>
+<script>AIO.loadSCSS('https://teknixstuff.github.io/AIOstacks/frontend/TVSP/autostyls.tscss');</script>
+<script src="https://teknixstuff.github.io/AIOstacks/frontend/TVSP/autostyls.js"></script>
+<!-- Config -->
+<meta x-type="config" x-name="background-image" x-value="background.jpg">
+<!-- Custom Scripts -->
+<script>
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    // if present, the header is where you move the DIV from:
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    // otherwise, move the DIV from anywhere inside the DIV:
+    elmnt.onmousedown = dragMouseDown;
+  }
+  let placeholderElem = document.createElement('div');
+  placeholderElem.style.width = elmnt.offsetWidth;
+  placeholderElem.style.height = elmnt.offsetHeight;
+  placeholderElem.style.display = 'none';
+  let elem_old_pos = {};
+  elem_old_pos.width = elmnt.offsetWidth;
+  elem_old_pos.height = elmnt.offsetHeight;
+  elem_old_pos.left = elmnt.getBoundingClientRect().left;
+  elem_old_pos.top = elmnt.getBoundingClientRect().top;
+  let insetedPlaceholder = false;
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    elmnt.style.left = elmnt.getBoundingClientRect().left;
+    elmnt.style.top = elmnt.getBoundingClientRect().top;
+    elmnt.style.position = 'absolute';
+    if (!insetedPlaceholder) {
+      elmnt.insertAdjacentElement('beforebegin', placeholderElem);
+      insetedPlaceholder = true;
+    }
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    // check position
+    if (
+        ((elem_old_pos.left + elem_old_pos.width) > elmnt.getBoundingClientRect().left) &&
+        ((elmnt.getBoundingClientRect().left + elmnt.offsetWidth) > elem_old_pos.left) &&
+        ((elem_old_pos.top + elem_old_pos.height) > elmnt.getBoundingClientRect().top) &&
+        ((elmnt.getBoundingClientRect().top + elmnt.offsetHeight) > elem_old_pos.top)
+      ) {
+      placeholderElem.style.display = 'block';
+    } else {
+      placeholderElem.style.display = 'none';
+    }
+  }
+
+  function closeDragElement() {
+    // stop moving when mouse button is released:
+    document.onmouseup = null;
+    document.onmousemove = null;
+    if (
+        ((elem_old_pos.left + elem_old_pos.width) > elmnt.getBoundingClientRect().left) &&
+        ((elmnt.getBoundingClientRect().left + elmnt.offsetWidth) > elem_old_pos.left) &&
+        ((elem_old_pos.top + elem_old_pos.height) > elmnt.getBoundingClientRect().top) &&
+        ((elmnt.getBoundingClientRect().top + elmnt.offsetHeight) > elem_old_pos.top)
+      ) {
+      elmnt.style.left = elem_old_pos.left;
+      elmnt.style.top = elem_old_pos.top;
+    }
+  }
+}
+</script>
+<!-- Body -->
+<style>
 body {
-  background-image: url('Trees.jpg');
+  color: black;
+}
+
+h1 {
+  color: black;
+}
+
+div {
+  color: black;
 }
 </style>
-<style>
-@font-face {
-  font-family: modern;
-  font-style: normal;
-  font-weight: 300;
-  src: local(".SFNSText-Light"), local(".HelveticaNeueDeskInterface-Light"), local(".LucidaGrandeUI"), local("Ubuntu Light"), local("Segoe UI Light"), local("Roboto-Light"), local("DroidSans"), local("Tahoma");
-}
-@font-face {
-  font-family: system;
-  font-style: normal;
-  font-weight: 300;
-  src: local("-apple-system"), local("BlinkMacSystemFont"), local("avenir next"), local("avenir"), local("segoe ui"), local("helvetica neue"), local("helvetica"), local("Cantarell"), local("Ubuntu"), local("roboto"), local("noto"), local("arial"), local("sans-serif");
-}
-:root {
-  font-family: system;
-}
-</style>
-<style>
-a {
-    color:white;
-}
-a:visited {
-    color:white;
-}
-a:hover {
-    color:white;
-}
-a:focus {
-    color:white;
-}
-a:active {
-    color:white;
-}
-</style>
-	  </html>
+<body class="flex flex-none content-center justify-center items-center flex-col p-2">
+  <div class="backdrop-blur bg-white/25 flex flex-none content-center justify-center items-center flex-col border-2 hover:z-50" id="infocard">
+    <div class="w-full bg-white/50 border-b-2 bg-[url('titlebar.png')]" id="infocardheader">
+      <span class="float-right bg-black/25 rounded-b"><img src="winbtns.png"></span>
+	  <span class="float-right px-2">Sonicfan2017's Stuff͏͏͏͏᠎᠎᠎᠎᠎                                               </span>
+    </div>
+    <div class="p-2 flex flex-none content-center justify-center items-center flex-col bg-[url('white.png')]">
+      <img src="sonic.png" width="128" height="128" class="p-1">
+      <h1 class="text-xl text-center inline-block p-1 rounded">Welcome to my website!</h1>
+      <div class="flex flex-none content-center justify-center items-center flex-col bg-white/35 backdrop-blur rounded p-2">
+        <div>
+          <a href="https://www.tiktok.com/@fastersonic2017" class="text-inherit underline">
+            <span>
+              <img src="tiktok.png" width="16" height="16" class="inline rounded"> TikTok
+            </span>
+          </a>
+		  <span class="px-1">|</span>
+		  <a href="https://www.youtube.com/@sonicfantech4527" class="text-inherit underline">
+            <span>
+              <img src="yt.png" width="16" height="16" class="inline"> YouTube
+            </span>
+          </a>
+           <span class="px-1">|</span>
+		            <a href="https://discord.gg/sFTG3ChNxw" class="text-inherit underline">
+            <span>
+              <img src="discord.png" width="16" height="16" class="inline rounded"> Discord
+            </span>
+          </a>
+          <span class="px-1">|</span>
+	    		            <a href="https://fastersonic2017.github.io/softwarearchive" class="text-inherit underline">
+            <span>
+              <img src="floppy.png" width="16" height="16" class="inline"> Software Archive
+            </span>
+          </a>
+         <span class="px-1">|</span>
+	    		            <a href="https://fastersonic2017.github.io/projects" class="text-inherit underline">
+            <span>
+              <img src="cmd.png" width="16" height="16" class="inline"> My Projects
+            </span>
+          </a>
+</div>
+  </div>
+  <script>dragElement(document.getElementById('infocard'));</script>
+</body>
